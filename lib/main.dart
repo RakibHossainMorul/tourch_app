@@ -17,6 +17,7 @@ class _TorchAppState extends State<TorchApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: TorchController(),
     );
   }
@@ -29,7 +30,12 @@ class TorchController extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('torch_light example app'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          'Tourch Light App',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: FutureBuilder<bool>(
         future: _isTorchAvailable(context),
@@ -39,21 +45,41 @@ class TorchController extends StatelessWidget {
               children: [
                 Expanded(
                   child: Center(
-                    child: ElevatedButton(
-                      child: const Text('Enable torch'),
-                      onPressed: () async {
+                    child: InkWell(
+                      onTap: () async {
                         _enableTorch(context);
                       },
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/flash_light.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Center(
-                    child: ElevatedButton(
-                      child: const Text('Disable torch'),
-                      onPressed: () {
+                    child: InkWell(
+                      onTap: () async {
                         _disableTorch(context);
                       },
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/close.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
